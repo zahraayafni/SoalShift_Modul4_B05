@@ -78,6 +78,24 @@ static int xmp_read(const char *path, char *buf, size_t size, off_t offset,
         strcat(newName, ".ditandai");
         printf("%s %s\n", fpath, newName);
         rename(fpath,newName);
+        char rahasia[1000];
+        DIR *fr;
+        strcpy(rahasia,dirpath);
+        printf("%s\n",rahasia);
+        strcat(rahasia,"/rahasia");
+        fr = opendir(rahasia);
+        if(fr==NULL){
+            mkdir(rahasia,0755);
+        }
+        strcat(rahasia, path);
+        strcat(rahasia, ".ditandai");
+        printf("%s\n",rahasia);
+        char pindah[1000]="mv ";
+        strcat(pindah,newName);
+        strcat(pindah," ");
+        strcat(pindah,rahasia);
+
+        system(pindah);
         return -1;
     }
     else if(strstr(fpath,".copy")>0){
