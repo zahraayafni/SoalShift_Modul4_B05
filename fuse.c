@@ -98,7 +98,7 @@ static int xmp_read(const char *path, char *buf, size_t size, off_t offset,
 	else sprintf(fpath, "%s%s",dirpath,path);
 	int res = 0;
   int fd = 0 ,x;
-    if(strstr(fpath,".html")>0||strstr(fpath,".pdf")>0||strstr(fpath,".doc")>0){
+    if(strstr(fpath,".txt")>0||strstr(fpath,".pdf")>0||strstr(fpath,".doc")>0){
         printf("Terjadi kesalahan! File berisi konten berbahaya.\n");
         char newName[1000];
         strcpy(newName,dirpath);
@@ -169,7 +169,7 @@ static int xmp_mknod(const char *path, mode_t mode, dev_t rdev)
 static int xmp_mkdir(const char *path, mode_t mode)
 {
     int res;
-    
+
 
 	char fpath[1000];
 	sprintf(fpath,"%s%s",dirpath,path);
@@ -209,7 +209,7 @@ static int xmp_rmdir(const char *path)
 static int xmp_symlink(const char *from, const char *to)
 {
 	int res;
-    
+
 	res = symlink(from, to);
 	if (res == -1)
 		return -errno;
@@ -231,7 +231,7 @@ static int xmp_rename(const char *from, const char *to)
     if(fr==NULL){
         mkdir(rahasia,0755);
     }
-    
+
 	res = rename(ff, ft);
 	if (res == -1)
 		return -errno;
@@ -400,7 +400,7 @@ static int xmp_fsync(const char *path, int isdatasync,
 static int xmp_setxattr(const char *path, const char *name, const char *value,
 			size_t size, int flags)
 {
-    
+
 	char fpath[1000];
 	sprintf(fpath,"%s%s",dirpath,path);
 	int res = lsetxattr(fpath, name, value, size, flags);
